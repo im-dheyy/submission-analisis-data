@@ -106,19 +106,15 @@ st.markdown("""
 * Aktivitas tertinggi cenderung terjadi pada hari kerja saat jam berangkat dan pulang kantor.
 """)
 
-# Membuat grafik batang untuk rata-rata pengguna casual vs registered per musim
+# Penggunaan casual vs registered berdasarkan hari dalam seminggu
 fig, ax = plt.subplots(figsize=(12, 6))
-day_df.groupby('season')[['casual', 'registered']].mean().plot(kind='bar', ax=ax)
-plt.title('Rata-rata Pengguna Casual vs Registered per Musim')
+day_df.groupby('weekday')[['casual', 'registered']].mean().plot(kind='bar', ax=ax)
+plt.title('Rata-rata Pengguna Casual vs Registered per Hari')
 plt.ylabel('Jumlah Pengguna')
-plt.xlabel('Musim')
+plt.xlabel('Hari dalam Seminggu')
 plt.legend(['Casual', 'Registered'])
+st.pyplot(fig)
 
-# Mengganti label musim dengan nama musim yang lebih deskriptif
-season_labels = {1: 'Semi', 2: 'Panas', 3: 'Gugur', 4: 'Dingin'}
-ax.set_xticklabels([season_labels[int(label.get_text())] for label in ax.get_xticklabels()])
-
-plt.show()
 
 # Conclusions
 st.header(" Kesimpulan")
